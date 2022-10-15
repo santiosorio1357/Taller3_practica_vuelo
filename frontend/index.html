@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rupola</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <div class="cabecera">
+        <center>
+            <h1 class="titulo">EJS Airline</h1>
+            <img src="img/avioncito.png" width="70">
+        </center>
+    </div>
+    <form class="formulario">
+        <div class="form-group ">
+            <label for="exampleInputEmail1">Nombre completo*</label>
+            <input required type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="cedula">Cédula*</label>
+            <input required type="text" class="form-control" id="cedula" placeholder="Ingrese su cédula">
+        </div><br>
+        <center>
+            <button type="submit" class="btn btn-primary" onclick="ingresar()">Ingresar</button>
+        </center>
+    </form>
+<script src="js/index.js"></script>
+</body>
+
+</html>
