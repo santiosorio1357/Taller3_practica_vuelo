@@ -9,8 +9,10 @@ var boton = document.getElementsByTagName('input');
 console.log(boton)
 
 let sillasEscogidas = [];
-
-
+/**
+    Función para añadir sillas a una lista
+    y restringir que no se seleccionen mas de tres
+ */
 function seleccionMaxima(objeto){
     if(sillasEscogidas.indexOf(objeto.id) == -1){
         if(sillasEscogidas.length < 3){
