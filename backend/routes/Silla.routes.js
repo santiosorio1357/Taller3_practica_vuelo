@@ -1,8 +1,9 @@
 import { Router } from "express";
-import {getSillas,createSilla} from '../controllers/Silla.controller'
+import {getSillas,createSilla,editSilla,deleteSilla,getSilla} from '../controllers/Silla.controller'
 const router=Router();
 router.get('/sillas',getSillas)
-router.post('/crearSilla',createSilla)
-router.put('/sillas',getSillas)
-router.delete('/sillas',getSillas)
+router.post('/sillas',createSilla)
+router.put('/sillas',editSilla)
+router.delete('/sillas',deleteSilla)
+router.get('/sillas/:id',getSilla)
 export default router

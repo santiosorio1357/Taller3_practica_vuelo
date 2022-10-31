@@ -19,3 +19,4 @@ export const getConnection = async () => {
     }
 
 }
+export {sql}
