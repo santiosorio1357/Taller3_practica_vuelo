@@ -23,7 +23,7 @@ const panelSillas = async () => {
         sillas = await Response.json()
     })
 
-
+    sillas.sort(comparar);
     sillas.forEach(element => {
         if (element.estado == "1") {
             element.estado = "libre"
@@ -50,6 +50,17 @@ const panelSillas = async () => {
     });
 
 
+}
+
+function comparar( a, b )
+  {
+  if ( a.ubicacion.toLowerCase() < b.ubicacion.toLowerCase()){
+    return -1;
+  }
+  if ( a.ubicacion.toLowerCase() > b.ubicacion.toLowerCase()){
+    return 1;
+  }
+  return 0;
 }
 const createSilla = () => {
     let contenido = document.getElementById("contenido")
@@ -155,7 +166,7 @@ const editSilla = async (object) => {
   </div>
   <div class="form-group ">
     <label for="precio">Estado</label>
-    <input class="form-control" type="number" placeholder="estado" id=estado disabled>
+    <input class="form-control" type="text"  id="estado" disabled>
   </div>
   <center>
   <button id="${id}" onclick="GuardarCambiosSilla(this)" class="btn btn-primary">Guardar</button>
@@ -169,7 +180,9 @@ const editSilla = async (object) => {
     document.getElementById("columna").value=response[0].ubicacion[1]
     document.getElementById("fila").value=response[0].ubicacion[0]
     document.getElementById("precio").value=response[0].precio
+    
     if(response[0].estado==0){
+        
         document.getElementById("estado").value="ocupado"
     }else{
         document.getElementById("estado").value="libre"

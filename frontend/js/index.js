@@ -79,6 +79,11 @@ const GuardarCambiosSilla = async (object) => {
     let columna = document.getElementById("columna").value;
     let precio = document.getElementById("precio").value;
     let estado = document.getElementById("estado").value
+    if(estado=="ocupado"){
+        estado=0
+    }else{
+        estado=1
+    }
     if (clase != "" && fila != "" && columna != "" && precio != "") {
         let silla = {
             "clase": clase,
@@ -189,6 +194,7 @@ const borrarSillaReserva = async (object) => {
     editReserva({ id })
 }
 const GuardarCambiosSillas = async () => {
+    console.log("holis")
     let idReserva = localStorage.getItem("reservaEditada")
     let reserva = await getReserva(idReserva)
     reserva = await reserva.json()

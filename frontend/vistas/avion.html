@@ -291,6 +291,13 @@
     </div>
     <b><br><br></b>
     <script src="../js/controlSillas.js"></script>
+    <script>
+        let cliente=localStorage.getItem("datos")
+        if(cliente==null){
+            window.location.href="../index.html"
+        }
+        
+    </script>
 </body>
 
 </html>

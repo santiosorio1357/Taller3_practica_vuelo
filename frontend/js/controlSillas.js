@@ -3,24 +3,24 @@ function bloquearAsiento(idAsiento) {
 
     asiento.setAttribute('disabled', '');
 }
-const todasLasSillas=[]
-const llenarTodasLasSillas=async()=>{
-    
-    let sillas=document.getElementsByTagName("input")
-    
+const todasLasSillas = []
+const llenarTodasLasSillas = async () => {
+
+    let sillas = document.getElementsByTagName("input")
+
     for (let i = 0; i < sillas.length; i++) {
 
-        let response =await getSillaU(sillas[i].id)
-        response=await response.json()
-        if(response.length<1){
+        let response = await getSillaU(sillas[i].id)
+        response = await response.json()
+        if (response.length < 1) {
             sillas[i].setAttribute('disabled', '');
         }
-        else if(response[0].estado==0){
+        else if (response[0].estado == 0) {
             sillas[i].setAttribute('disabled', '');
         }
-        
+
     }
-    
+
 }
 llenarTodasLasSillas()
 let sillasEscogidas = [];
@@ -57,46 +57,67 @@ const reservar = async () => {
         for (let i = 0; i < sillasEscogidas.length; i++) {
             let silla = await getSillaU(sillasEscogidas[i])
             silla = await silla.json()
-            sillas.push(silla[0])
-        }
-        let nombreCliente = cliente.nombre;
-        let precioTotal = 0
-        let cedulaCliente = cliente.cedula;
-        
-        sillas.forEach(async objeto => {
-            objeto.estado=0
-            precioTotal += objeto.precio
-            await updateSilla(objeto)
-        })
-        let datos = {
-            "precioTotal": precioTotal,
-            "nombreCliente": nombreCliente,
-            "cedulaCliente": cedulaCliente
-        }
-        let response=await setReserva(datos)
-        response=await response.json()
-        sillas.forEach(async element => {
-            let idSilla=element.idSilla
-            let precioSilla=element.precio
-            let data={
-                "idReserva":response,
-                "idSilla":idSilla,
-                "precioSilla":precioSilla
-            }
-            await setDetalle(data)
-        });
-        Swal.fire({
-            icon: 'success',
-            title: 'Reserva realizada',
-            showConfirmButton: false,
-            timer: 1500
-        })
-        
-        setTimeout(function () {
-            window.location.href="../index.html"
-        }, 2000)
 
-    } else {
+            sillas.push(silla[0])
+
+        }
+        let entrada = true
+        sillas.forEach(element => {
+            if (element.estado == 0) {
+                entrada = false
+            }
+        })
+        if (entrada) {
+
+
+            let nombreCliente = cliente.nombre;
+            let precioTotal = 0
+            let cedulaCliente = cliente.cedula;
+
+            sillas.forEach(async objeto => {
+                objeto.estado = 0
+                precioTotal += objeto.precio
+                await updateSilla(objeto)
+            })
+            let datos = {
+                "precioTotal": precioTotal,
+                "nombreCliente": nombreCliente,
+                "cedulaCliente": cedulaCliente
+            }
+            let response = await setReserva(datos)
+            response = await response.json()
+            sillas.forEach(async element => {
+                let idSilla = element.idSilla
+                let precioSilla = element.precio
+                let data = {
+                    "idReserva": response,
+                    "idSilla": idSilla,
+                    "precioSilla": precioSilla
+                }
+                await setDetalle(data)
+            });
+            Swal.fire({
+                icon: 'success',
+                title: 'Reserva realizada',
+                showConfirmButton: false,
+                timer: 1500
+            })
+
+            setTimeout(function () {
+                localStorage.removeItem("datos")
+                window.location.href = "../index.html"
+            }, 2000)
+
+        } else {
+            Swal.fire({
+
+                icon: 'error',
+                title: 'Esta Silla ya esta ocupada',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        }
+    }else{
         Swal.fire({
 
             icon: 'error',
@@ -105,5 +126,4 @@ const reservar = async () => {
             timer: 2000
         })
     }
-
 }
