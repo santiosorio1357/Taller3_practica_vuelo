@@ -5,9 +5,9 @@ function bloquearAsiento(idAsiento) {
 }
 const todasLasSillas=[]
 const llenarTodasLasSillas=async()=>{
-    console.log("llenar")
+    
     let sillas=document.getElementsByTagName("input")
-    console.log(sillas)
+    
     for (let i = 0; i < sillas.length; i++) {
 
         let response =await getSillaU(sillas[i].id)
@@ -62,7 +62,7 @@ const reservar = async () => {
         let nombreCliente = cliente.nombre;
         let precioTotal = 0
         let cedulaCliente = cliente.cedula;
-        console.log(cliente)
+        
         sillas.forEach(async objeto => {
             objeto.estado=0
             precioTotal += objeto.precio
