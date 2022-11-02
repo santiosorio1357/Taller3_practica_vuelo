@@ -311,7 +311,7 @@ ol {
   width: fit-content;
 }
 .reservar{
-  margin-top: 30%;
+  margin-top: 35%;
   margin-left: 47%;
 }
 body {
@@ -365,3 +365,7 @@ body {
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 /*# sourceMappingURL=estilos.css.map */
+.boton-atras{
+  margin-top: 2%;
+  margin-left: 2%;
+}

@@ -5,12 +5,13 @@ function bloquearAsiento(idAsiento) {
 }
 const todasLasSillas=[]
 const llenarTodasLasSillas=async()=>{
+    console.log("llenar")
     let sillas=document.getElementsByTagName("input")
+    console.log(sillas)
     for (let i = 0; i < sillas.length; i++) {
-        
-        let response =await getSilla(sillas[i].id)
+
+        let response =await getSillaU(sillas[i].id)
         response=await response.json()
-        
         if(response.length<1){
             sillas[i].setAttribute('disabled', '');
         }
@@ -54,7 +55,7 @@ const reservar = async () => {
         let cliente = JSON.parse(localStorage.getItem('datos'))
         let sillas = []
         for (let i = 0; i < sillasEscogidas.length; i++) {
-            let silla = await getSilla(sillasEscogidas[i])
+            let silla = await getSillaU(sillasEscogidas[i])
             silla = await silla.json()
             sillas.push(silla[0])
         }
@@ -64,9 +65,8 @@ const reservar = async () => {
         console.log(cliente)
         sillas.forEach(async objeto => {
             objeto.estado=0
-            console.log()
-            await updateSilla(objeto)
             precioTotal += objeto.precio
+            await updateSilla(objeto)
         })
         let datos = {
             "precioTotal": precioTotal,
@@ -91,8 +91,9 @@ const reservar = async () => {
             showConfirmButton: false,
             timer: 1500
         })
+        
         setTimeout(function () {
-
+            window.location.href="../index.html"
         }, 2000)
 
     } else {

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Collapsible sidebar using Bootstrap 4</title>
+    <title>Admin EJS</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
@@ -27,7 +27,7 @@
 
 <body>
 
-    <div class="wrapper">
+    <div id="body" class="wrapper">
         <!-- Sidebar Holder -->
         <nav id="sidebar">
 
@@ -35,13 +35,14 @@
             <ul class="list-unstyled components">
                 <p>Panel de administrador</p>
                 <li>
-                    <a href="#" onclick="panelSillas()">Sillas</a>
-
-                </li>
-                <li>
                     <a href="#" onclick="panelReservas()">Reservas</a>
 
                 </li>
+                <li>
+                    <a href="#" onclick="panelSillas()">Sillas</a>
+
+                </li>
+                
 
             </ul>
 
@@ -105,6 +106,7 @@
     <script src="../js/rutas.js"></script>
     <script src="../js/BaseDatos.js"></script>
     <script src="../js/index.js"></script>
+    <script>panelReservas()</script>
 </body>
 
 </html>

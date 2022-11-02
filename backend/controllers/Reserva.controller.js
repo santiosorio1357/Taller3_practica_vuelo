@@ -12,7 +12,7 @@ export const createReserva = async (req, res) => {
     }
     const pool = await getConnection()
     pool.request()
-        .input("cedulaCliente", sql.Int, cedulaCliente)
+        .input("cedulaCliente", sql.VarChar, cedulaCliente)
         .input("nombreCliente", sql.VarChar, nombreCliente)
         .input("precioTotal", sql.Float, precioTotal)
         .query(`
@@ -34,14 +34,14 @@ export const editReserva = async (req, res) => {
     const pool = await getConnection()
     await pool.request()
         .input("idReserva", sql.BigInt, idReserva)
-        .input("cedulaCliente", sql.Int, cedulaCliente)
+        .input("cedulaCliente", sql.VarChar, cedulaCliente)
         .input("nombreCliente", sql.VarChar, nombreCliente)
         .input("precioTotal", sql.Float, precioTotal)
         .query("UPDATE Reserva SET cedulaCliente=@cedulaCliente,nombreCliente=@nombreCliente,precioTotal=@precioTotal WHERE idReserva=@idReserva")
     res.json("updated Reserva")
 }
 export const deleteReserva = async (req, res) => {
-    let idReserva = req.params.id
+    let {idReserva} = req.body
 
     if (idReserva == null) {
         return res.status(400).json({ msg: "llene todos los campos" })
@@ -56,7 +56,7 @@ export const deleteReserva = async (req, res) => {
 }
 export const getReserva = async (req, res) => {
     const idReserva = req.params.id
-
+    console.log(idReserva)
     const pool = await getConnection()
     const result = await pool.request().input("idReserva", sql.BigInt, idReserva).query('select * from Reserva WHERE idReserva=@idReserva')
     res.json(result.recordset)

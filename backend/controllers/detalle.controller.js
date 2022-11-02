@@ -46,7 +46,7 @@ export const deletedetalle=async (req,res)=>{
 
 }
 export const deletedetalleBySilla=async(req,res)=>{
-    const{idSilla}=req.params.id
+    const{idSilla}=req.body
     if(idSilla==null){
         return res.status(400).json({msg:"llene todos los campos"})
     }
@@ -75,5 +75,21 @@ export const getdetalle = async (req, res) => {
     .input("idReserva",sql.BigInt,idReserva)
     .input("idSilla",sql.BigInt,idSilla)
     .query('select * from detalle WHERE idReserva=@idReserva and idSilla=@idSilla')
+    res.json(result.recordset)
+}
+export const getDetalleByReserva=async (req,res)=>{
+    const idReserva=req.params.id
+    const pool = await getConnection()
+    const result=await pool.request()
+    .input("idReserva",sql.BigInt,idReserva)
+    .query('select * from detalle WHERE idReserva=@idReserva')
+    res.json(result.recordset)
+}
+export const getDetalleBySilla=async (req,res)=>{
+    const idSilla=req.params.id
+    const pool = await getConnection()
+    const result=await pool.request()
+    .input("idSilla",sql.BigInt,idSilla)
+    .query('select * from detalle WHERE idSilla=@idSilla')
     res.json(result.recordset)
 }

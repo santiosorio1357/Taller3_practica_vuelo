@@ -4,6 +4,6 @@ const router=Router();
 router.get('/Reservas',getReservas)
 router.post('/Reservas',createReserva)
 router.put('/Reservas',editReserva)
-router.delete('/Reservas/:id',deleteReserva)
-router.get('/Reservas/:id',getReserva)
+router.delete('/Reservas/',deleteReserva)
+router.get('/Reservas/:id/',getReserva)
 export default router

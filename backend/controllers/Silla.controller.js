@@ -54,10 +54,16 @@ export const deleteSilla = async (req, res) => {
     res.json("updated silla")
 
 }
-export const getSilla = async (req, res) => {
+export const getSillaU = async (req, res) => {
     const ubicacion = req.params.id
     const pool = await getConnection()
     const result = await pool.request().input("ubicacion", sql.VarChar, ubicacion).query('select * from Silla WHERE ubicacion=@ubicacion')
+    res.json(result.recordset)
+}
+export const getSilla = async (req, res) => {
+    const idSilla = req.params.id
+    const pool = await getConnection()
+    const result = await pool.request().input("idSilla", sql.BigInt, idSilla).query('select * from Silla WHERE idSilla=@idSilla')
     
     res.json(result.recordset)
 }
